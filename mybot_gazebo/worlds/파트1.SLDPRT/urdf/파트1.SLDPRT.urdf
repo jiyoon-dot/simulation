@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="파트1.SLDPRT">
+  <link
+    name="파트1.SLDPRT">
+    <inertial>
+      <origin
+        xyz="23.657 -0.68269 4.8755"
+        rpy="0 0 0" />
+      <mass
+        value="1733100" />
+      <inertia
+        ixx="125790000"
+        ixy="-625590.000000001"
+        ixz="22591000"
+        iyy="366050000"
+        iyz="-36990.0000000075"
+        izz="244340000" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707963267949 0 0" />
+      <geometry>
+        <mesh
+          filename="package://파트1.SLDPRT/meshes/파트1.SLDPRT.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.69804 0.69804 0.69804 1" />
+        <texture
+          filename="package://파트1.SLDPRT/textures/" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707963267949 0 0" />
+      <geometry>
+        <mesh
+          filename="package://파트1.SLDPRT/meshes/파트1.SLDPRT.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

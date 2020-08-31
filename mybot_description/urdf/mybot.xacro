@@ -1,0 +1,370 @@
+<?xml version='1.0'?>
+
+<robot name="myrobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="cameraSize" value="0.02"/>
+  <xacro:property name="cameraMass" value="0.001"/>
+  <xacro:property name="wheelMass" value="1.0"/>
+
+  <xacro:include filename="$(find mybot_description)/urdf/mybot.gazebo" />
+  <xacro:include filename="$(find mybot_description)/urdf/materials.xacro" />
+
+<link name="base_link">
+    <pose xyz="0 0 0" rpy="0 0 0" />
+
+  <inertial>
+    <mass value="10.0"/>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <inertia ixx="0.01632" ixy="0.0" ixz="0.0" iyy="0.01632" iyz="0.0" izz="0.01632"/>
+  </inertial>
+
+  <collision name='collision'>
+    <origin xyz="0 0 0.3" rpy="0 0 0" />
+    <geometry>
+      <box size="0.382 0.12 0.1"/>
+    </geometry>
+  </collision>
+
+  <visual name='base_link_visual'>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.382 0.12 0.1"/>
+    </geometry>
+  </visual>  
+
+</link>
+
+
+
+<joint type="continuous" name="joint_R1">
+  <parent link="base_link"/>
+  <child link="R1"/>
+  <origin xyz="0.1501 -0.0908 0.25" rpy="0 0 0"/>
+  <axis xyz="0 1 0" rpy="0 0 0"/>
+  <limit effort="10000" velocity="1000"/>
+  <joint_properties damping="1.0" friction="1.0"/>
+</joint>
+
+<link name="R1">
+  
+  <collision name='collision'>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <geometry>
+      <cylinder radius="0.05" length="0.056"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <slip1>0.5</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+    </surface>
+  </collision>
+
+  <visual name='R1_visual'>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <geometry>
+      <cylinder radius="0.05" length="0.056"/>
+    </geometry>
+  </visual>
+
+  <inertial>
+    <mass value="${wheelMass}"/>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <inertia ixx="0.035453" ixy="0.0" ixz="0.0" iyy="0.035453" iyz="0.0" izz="0.06272"/>
+  </inertial>
+</link>
+
+  <transmission name="R1_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_R1"/>
+    <actuator name="R1_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+<joint type="continuous" name="joint_R2">
+  <parent link="base_link"/>
+  <child link="R2"/>
+  <origin xyz="-0.1501 -0.0908 0.25" rpy="0 0 0"/>
+  <axis xyz="0 1 0" rpy="0 0 0"/>
+  <limit effort="10000" velocity="1000"/>
+  <joint_properties damping="1.0" friction="1.0"/>
+</joint>
+
+
+<link name="R2">
+  <collision name='collision'>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <geometry>
+      <cylinder radius="0.05" length="0.056"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <slip1>0.5</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+    </surface>
+  </collision>
+
+
+  <visual name='R2_visual'>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <geometry>
+      <cylinder radius="0.05" length="0.056"/>
+    </geometry>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <mass value="${wheelMass}"/>
+    <inertia ixx="0.035453" ixy="0.0" ixz="0.0" iyy="0.035453" iyz="0.0" izz="0.06272"/>
+  </inertial>
+</link>
+
+  <transmission name="R2_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_R2"/>
+    <actuator name="R2_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+
+<joint name="joint_L1" type="continuous">
+  <parent link="base_link"/>
+  <child link="L1"/>
+  <origin xyz="0.1501 0.0908 0.25" rpy="0 0 0"/>
+  <axis xyz="0 1 0"/>
+  <limit effort="10000" velocity="1000"/>
+  <joint_properties damping="1.0" friction="1.0"/>
+</joint>
+
+
+<link name="L1">
+  <collision name='collision'>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <geometry>
+      <cylinder radius="0.05" length="0.056"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <slip1>0.5</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+    </surface>
+  </collision>
+
+  <visual name='L1_visual'>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <geometry>
+      <cylinder radius="0.05" length="0.056"/>
+    </geometry>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <mass value="${wheelMass}"/>
+    <inertia ixx="0.035453" ixy="0.0" ixz="0.0" iyy="0.035453" iyz="0.0" izz="0.06272"/>
+    </inertial>
+</link>
+
+  <transmission name="L1_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_L1"/>
+    <actuator name="L1_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+<joint name="joint_L2" type="continuous">
+  <parent link="base_link"/>
+  <child link="L2"/>
+  <origin xyz="-0.1501 0.0908 0.25" rpy="0 0 0" />
+  <axis xyz="0 1 0" rpy="0 0 0"/>
+  <limit effort="10000" velocity="1000"/>
+  <joint_properties damping="1.0" fiction="1.0"/>
+</joint>
+
+<link name="L2">
+  <collision name='collision'>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <geometry>
+      <cylinder radius="0.05" length="0.056"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+          <slip1>0.5</slip1>
+          <slip2>0</slip2>
+        </ode>
+      </friction>
+    </surface>
+  </collision>
+
+  <visual name='L2_visual'>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <geometry>
+      <cylinder radius="0.05" length="0.056"/>
+    </geometry>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 1.57079632679 1.57079632679"/>
+    <mass value="${wheelMass}"/>
+    <inertia ixx="0.035453" ixy="0.0" ixz="0.0" iyy="0.035453" iyz="0.0" izz="0.06272"/>
+  </inertial>
+</link>
+
+  <transmission name="L2_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_L2"/>
+    <actuator name="L2_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <link name="camera">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+
+    <inertial>
+      <mass value="${cameraMass}" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <box_inertia m="${cameraMass}" x="${cameraSize}" y="${cameraSize}" z="${cameraSize}" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.2015 0 0.3" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera"/>
+  </joint>
+
+
+  <!-- Hokuyo Laser -->
+
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.0 0 0.372" rpy="0 0 0"/>
+    <parent link="base_link"/> 
+    <child link="hokuyo"/>
+  </joint>
+
+  <link name="hokuyo">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://mybot_description/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="0.0001" />
+      <origin xyz="0 0 0" rpy="0 1.5707 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+    </inertial>
+  </link>
+
+
+  <link name="caster_front_link">
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0.02 0"/>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <origin rpy="1.57079632679 0 0" xyz="0 0.02 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="caster_front_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_front_link"/>
+    <origin rpy="-1.57079632679 0 0" xyz="0.115 0.0 0.257"/>
+  </joint>
+  <gazebo reference="caster_front_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <link name="caster_back_link">
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0.02 0.02 0 "/>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <origin rpy="1.57079632679 0 0" xyz="0.02 0.02 0 "/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="caster_back_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_back_link"/>
+    <origin rpy="-1.57079632679 0 0" xyz="-0.135 0.0 0.257"/>
+  </joint>
+  <gazebo reference="caster_back_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+</robot>
